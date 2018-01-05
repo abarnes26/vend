@@ -1,5 +1,5 @@
 class Machine < ApplicationRecord
-  has_and_belongs_to_many :snacks_machines
-  has_and_belongs_to_many :snacks, through: :snacks_machines
+  has_many :machines_snack
+  has_and_belongs_to_many :snacks, through: :machines_snack
   belongs_to :owner
 end

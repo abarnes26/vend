@@ -21,6 +21,13 @@ ActiveRecord::Schema.define(version: 20180105161011) do
     t.index ["owner_id"], name: "index_machines_on_owner_id"
   end
 
+  create_table "machines_snack", force: :cascade do |t|
+    t.bigint "snack_id"
+    t.bigint "machine_id"
+    t.index ["machine_id"], name: "index_machines_snack_on_machine_id"
+    t.index ["snack_id"], name: "index_machines_snack_on_snack_id"
+  end
+
   create_table "owners", force: :cascade do |t|
     t.string "name"
   end
@@ -30,14 +37,7 @@ ActiveRecord::Schema.define(version: 20180105161011) do
     t.float "price"
   end
 
-  create_table "snacks_machines", force: :cascade do |t|
-    t.bigint "snack_id"
-    t.bigint "machine_id"
-    t.index ["machine_id"], name: "index_snacks_machines_on_machine_id"
-    t.index ["snack_id"], name: "index_snacks_machines_on_snack_id"
-  end
-
   add_foreign_key "machines", "owners"
-  add_foreign_key "snacks_machines", "machines"
-  add_foreign_key "snacks_machines", "snacks"
+  add_foreign_key "machines_snack", "machines"
+  add_foreign_key "machines_snack", "snacks"
 end
